@@ -1,0 +1,39 @@
+{
+  "name": "editaplot-dsh",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness (DSH) plugin for EditaPlot: AI-guided editable scientific figures through local Origin/OriginPro 2021–2026b. This is a derivative work of hang-jin/editaplot, distributed under Apache-2.0.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caob23/editaplot-dsh.git"
+  },
+  "homepage": "https://github.com/caob23/editaplot-dsh#readme",
+  "bugs": {
+    "url": "https://github.com/caob23/editaplot-dsh/issues"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "prepare": "node scripts/build-bundle.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "lib/",
+    "editaplot_mcp_server.py",
+    "skills/"
+  ],
+  "dependencies": {
+    "@deepseek-ai/dsh-cordis": "workspace:*"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "*",
+    "@deepseek-ai/dsh-invariants": "*"
+  }
+}
