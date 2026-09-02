@@ -1,0 +1,58 @@
+# editaplot-dsh bundle patch — registers the EditaPlot MCP server as a host
+# DSH capability and writes the SKILL.md to the harness skill directory.
+#
+# Layer order (applied after @deepseek-ai/dsh-base + dsh-web-app):
+#   - insert an mcp-editaplot row (a sibling of the existing mcp-* rows)
+#   - insert a skill-editaplot row that publishes SKILL.md on startup
+#
+# failOnStartupError: false mirrors the dsh-origin-plugin precedent so the
+# DSH process never fails to boot when Origin/OriginPro is not installed;
+# the missing host is reported per-call instead.
+
+- insert:
+    - id: mcp-editaplot
+      config:
+        serverName: editaplot
+        transport: stdio
+        # The bundle computes its own absolute path at apply-time so the path
+        # is anchored to <DSH_HOME>/profiles/<profile>/node_modules/editaplot-dsh/
+        # and never to whatever cwd the launcher happened to inherit.
+        command: !!js |
+          (() => {
+            const os = require('node:os')
+            const path = require('node:path')
+            const fs = require('node:fs')
+            const home = process.env.DSH_HOME || path.join(os.homedir(), '.dsh')
+            const venvPython = path.join(home, 'profiles', 'web', 'node_modules', 'editaplot-dsh', '.venv', 'Scripts', 'python.exe')
+            if (fs.existsSync(venvPython)) return venvPython
+            return process.platform === 'win32' ? 'python' : 'python3'
+          })()
+        args:
+          - !!js |
+            (() => {
+              const os = require('node:os')
+              const path = require('node:path')
+              const home = process.env.DSH_HOME || path.join(os.homedir(), '.dsh')
+              return path.join(home, 'profiles', 'web', 'node_modules', 'editaplot-dsh', 'editaplot_mcp_server.py')
+            })()
+        failOnStartupError: false
+        env:
+          EDITAPLOT_VERSION_TARGET: '2025b'
+          EDITAPLOT_VERIFIED_BASELINE: '2024b'
+          # Pin originpro per docs/dependency-inventory.md (BSD, OriginLab).
+          EDITAPLOT_ORIGINPRO_PIN: '1.1.15'
+
+    - id: skill-editaplot
+      config:
+        sourceDir: './skills'
+        targetDir: !!js |
+          (() => {
+            const os = require('node:os')
+            const path = require('node:path')
+            const home = process.env.DSH_HOME || path.join(os.homedir(), '.dsh')
+            return path.join(home, 'skills')
+          })()
+        skills:
+          - name: editaplot
+            description: 'Analyze local scientific CSV/TXT/XLS/XLSX data; recommend publication-informed charts and Chinese scientific palettes; freeze a reproducible plan; and automate editable figures through a callable local Origin/OriginPro installation on physical Windows 10/11 x64.'
+            entry: 'editaplot/SKILL.md'
