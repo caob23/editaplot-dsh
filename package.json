@@ -1,9 +1,25 @@
 {
   "name": "editaplot-dsh",
   "version": "0.1.0",
-  "description": "DeepSeek Harness (DSH) plugin for EditaPlot: AI-guided editable scientific figures through local Origin/OriginPro 2021–2026b. This is a derivative work of hang-jin/editaplot, distributed under Apache-2.0.",
+  "description": "DeepSeek Harness (DSH) 适配 EditaPlot: 通过本地 Origin/OriginPro 2021–2026b,让 AI 引导生成可编辑的科学图表。本包是 hang-jin/editaplot 的 Apache-2.0 派生作品。",
   "license": "Apache-2.0",
   "type": "module",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "editaplot",
+    "origin",
+    "originpro",
+    "scientific-plotting",
+    "mcp",
+    "model-context-protocol",
+    "ai-agent",
+    "scientific-figure"
+  ],
+  "author": {
+    "name": "caob23",
+    "url": "https://github.com/caob23"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/caob23/editaplot-dsh.git"
@@ -18,7 +34,8 @@
     }
   },
   "scripts": {
-    "prepare": "node scripts/build-bundle.mjs"
+    "prepare": "node scripts/build-bundle.mjs",
+    "test": "vitest run tests/"
   },
   "engines": {
     "node": ">=20"
@@ -27,7 +44,18 @@
     "cordis.patch.yml",
     "lib/",
     "editaplot_mcp_server.py",
-    "skills/"
+    "skills/",
+    "scripts/build-bundle.mjs",
+    "docs/",
+    "tests/",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "pnpm-workspace.yaml",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "README.en.md",
+    ".gitignore"
   ],
   "dependencies": {
     "@deepseek-ai/dsh-cordis": "workspace:*"
