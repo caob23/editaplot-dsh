@@ -1,0 +1,25 @@
+# editaplot-dsh ignores — mirror the upstream policy plus DSH-specific bits.
+
+# Local Python env created by the MCP bridge on first install.
+.venv/
+__pycache__/
+*.pyc
+
+# Build output produced by `pnpm run prepare`.
+node_modules/
+lib/
+
+# Per-developer DSH state and local renders.
+.DSH_HOME/
+*.opju
+*.png
+*.pdf
+*.tif
+*.tif.tmp
+
+# Tooling.
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
