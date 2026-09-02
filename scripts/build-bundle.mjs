@@ -8,10 +8,11 @@
  * Mirrors the precedent set by @deepseek-ai/dsh-base/lib/index.js.
  */
 import { mkdirSync, writeFileSync, chmodSync, existsSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const root = resolve(new URL('..', import.meta.url).pathname)
-const libDir = resolve(root, 'lib')
+const root = dirname(fileURLToPath(import.meta.url))
+const libDir = resolve(root, '..', 'lib')
 
 if (!existsSync(libDir)) mkdirSync(libDir, { recursive: true })
 
@@ -41,7 +42,7 @@ writeFileSync(
 )
 
 // Make the Python server executable on POSIX hosts.
-const py = resolve(root, 'editaplot_mcp_server.py')
+const py = resolve(root, '..', 'editaplot_mcp_server.py')
 if (existsSync(py)) {
   try { chmodSync(py, 0o755) } catch { /* Windows ignores this */ }
 }
