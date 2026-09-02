@@ -1,0 +1,44 @@
+editaplot-dsh
+Copyright 2026 editaplot-dsh contributors
+
+This product includes software developed by the editaplot-dsh contributors
+and distributed under the Apache License, Version 2.0.
+
+This product includes and depends on hang-jin/editaplot (Apache License 2.0):
+
+    EditaPlot
+    Copyright 2026 EditaPlot contributors
+    https://github.com/hang-jin/editaplot
+
+    Licensed under the Apache License, Version 2.0.
+
+Modifications and additions:
+
+- `cordis.patch.yml`: registers an `mcp-editaplot` row in the DSH patch
+  stack and publishes `skills/editaplot/SKILL.md` on startup.
+- `editaplot_mcp_server.py`: an MCP server that wraps the upstream
+  EditaPlot CLI; the upstream runtime is unmodified.
+- `skills/editaplot/SKILL.md`: the upstream skill with an MCP tool surface
+  section appended. Forbidden behaviours are preserved verbatim.
+- `package.json`: declares `dsh.bundle.patch` so the DSH `plugin` CLI
+  recognises this package as a profile layer.
+
+Third-party runtime notices (inherited from upstream THIRD_PARTY_NOTICES.md):
+
+- The upstream Skill repair route may install NumPy, pandas, PyYAML,
+  jsonschema, Matplotlib, `originpro`, openpyxl, xlrd, Pillow, and their
+  Python dependencies. `originpro` and `OriginExt` are supplied by
+  OriginLab for automating a separately installed Origin application.
+  This repository does not redistribute Origin.
+
+Trademark notice:
+
+- EditaPlot is an independent compatibility project. It is not affiliated
+  with, endorsed by, sponsored by, or an official product of OriginLab
+  Corporation. Origin and OriginPro are trademarks of OriginLab
+  Corporation; their names appear only to describe software
+  compatibility, not as project branding authorisation.
+
+- Nature, Science, ACS and other journal names belong to their respective
+  owners. Any palette assets in the upstream repository are independently
+  redrawn from normalised HEX values; no journal artwork is redistributed.
