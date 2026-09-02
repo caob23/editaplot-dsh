@@ -1,0 +1,8 @@
+# editaplot-dsh pnpm workspace — required so pnpm-managed installs get a
+# hoisted nodeLinker like every other DSH profile bundle. Mirrors the
+# PROFILE_PNPM_WORKSPACE template in @deepseek-ai/dsh-app-boot.
+packages:
+  - .
+
+nodeLinker: hoisted
+autoInstallPeers: false
